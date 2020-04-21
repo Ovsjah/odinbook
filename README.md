@@ -44,7 +44,7 @@ def configure_sign_in_params
 end
 ```
 
-7. Set up Sing Sign-On (SSO) for logging in with Google, Facebook, Twitter by adding
+7. Set up Single Sign-On (SSO) for logging in with Google, Facebook, Twitter by adding
 ```
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
