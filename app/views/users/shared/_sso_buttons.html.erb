@@ -1,0 +1,8 @@
+<% if devise_mapping.omniauthable? %>
+  <% resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-secondary" do %>
+      <%= icon 'fab', provider.split('_').first, class: 'mr-2' %>
+      Sign in with <%= provider.split('_').first.capitalize %>
+    <% end %>
+  <% end %>
+<% end %>
