@@ -1,0 +1,18 @@
+<div class='card'>
+  <div class='card-header'>
+    <h5 class='card-title text-center'><%= user.username %><h5>
+  </div>
+  <%= image_tag('avatar-placeholder.gif', class: "card-img-top rounded-0") %>
+  <div class='card-body'>
+    <h5 class='card-title text-center'>
+      <span class='col badge badge-light'><%= user.email %></span>
+    </h5>
+    <% if current_user != user %>
+      <% unless current_user.friends.include? user %>
+        <%= link_to 'Send a friend request', send_friend_request_path(user), class: 'btn btn-block btn-primary mt-1' %>
+      <% else %>
+        <%= link_to 'Unfriend', unfriend_path(user), method: :delete, class: 'btn btn-block btn-danger mt-1' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

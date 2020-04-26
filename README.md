@@ -1,7 +1,7 @@
 # [Odinbook](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project#project-building-facebook)
 
 ## About
-Facebook clone, where users can post and follow other users. User can sign-in/sign-up using sso via Google, Twitter or Facebook accounts.
+Facebook clone, where users can send friend requests, post and comment on posts. User can sign-in/sign-up using sso via Google, Twitter or Facebook accounts.
 
 ## Guidelines
 1. Add `gem 'devise'`

@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= render 'layouts/topbar' %>
+    <% end %>
+    
     <div class='container-fluid'>
       <%= render 'layouts/flash_messages' %>
       <%= yield %>

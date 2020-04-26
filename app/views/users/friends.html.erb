@@ -1,0 +1,7 @@
+<div class='row justify-content-center'>
+  <% current_user.friends.each do |friend| %>
+    <div class='col-lg-3 col-md-5 my-4'>
+      <%= render 'profile', user: friend %>
+    </div>
+  <% end %>
+</div>
