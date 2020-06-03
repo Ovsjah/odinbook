@@ -1,0 +1,21 @@
+<div class='card my-5 bg-light'>
+  <div class='card-header border-0'>
+    <%= image_tag('avatar-placeholder.gif', size: 40, class: "rounded-circle") %>
+    <%= post.author.username %>
+  </div>
+  <div class='card-body'>
+    <p class='card-text'>
+      <%= post.content %>
+    </p>
+  </div>
+  <div class='card-footer'>
+    <span class='btn text-secondary p-0'>
+      <%= icon 'fa', 'thumbs-up' %>
+      <span><%= post.likes.count %></span>
+    </span>
+    <span class='btn text-secondary float-right p-0'>
+      <%= icon 'fa', 'comment' %>
+      <span>Comment</span>
+    </span>
+  </div>
+</div>

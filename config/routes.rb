@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'home#welcome'
+  root to: 'posts#index'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     sessions: 'users/sessions'
   }
+
+  resources :posts, only: :index
 
   get '/send/:id', to: 'friend_requests#send_request', as: :send_friend_request
   get '/accepted/:id', to: 'friend_requests#accept', as: :accepted

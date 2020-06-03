@@ -13,7 +13,16 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  has_many :posts, -> { order(created_at: :desc) }, dependent: :destroy
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
+
+  has_many :comments, dependent: :destroy
+  has_many :commented_posts, -> { distinct }, through: :comments, source: :post
+
   has_and_belongs_to_many :friends,
+    -> { order(created_at: :asc) },
     foreign_key: :pal_id,
     join_table: :relations,
     class_name: 'User'
@@ -77,6 +86,14 @@ class User < ApplicationRecord
     sent_friend_requests.find_by_receiver_id(user)&.destroy
     user.friends.delete(self)
     friends.delete(user)
+  end
+
+  def like(post_id)
+    likes.create(post_id: post_id)
+  end
+
+  def comment(post_id, comment)
+    comments.create(post_id: post_id, content: comment)
   end
 
   private
