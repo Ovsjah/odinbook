@@ -93,12 +93,11 @@ class User < ApplicationRecord
     comments.create(post_id: post_id, content: comment)
   end
 
+  def generate_username
+    self.username += (self.username.first + rand.to_s[2..3])
+  end
+
   private
-
-    def generate_username
-      self.username += (self.username.first + rand.to_s[2..3])
-    end
-
     def set_friendship
       friends << @friend
       @friend.friends << self
