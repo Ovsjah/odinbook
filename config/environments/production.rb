@@ -116,7 +116,7 @@ Rails.application.configure do
   # Heroku deploy
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'ovsjazz-odin-flight-booker.herokuapp.com'
+  host = 'ovsjazz-odinbook.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
 
   config.action_mailer.smtp_settings = {
