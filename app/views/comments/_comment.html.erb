@@ -1,9 +1,9 @@
 <li id='<%= comment.id %>' class='my-2 list-group-item<%= ' d-none' unless visible %>' data-controller='comments'>
   <div class='row justify-content-between'>
-    <div class='col-auto'>
+    <%= link_to comment.author, class: 'col-auto nav-link text-muted font-weight-bold' do %>
       <%= avatar_for(comment.author, 30) %>
       <span><%= comment.author.username %></span>
-    </div>
+    <% end %>
     <div class='btn-toolbar<%= ' d-none' unless current_user == comment.author %>'>
       <button class='btn btn-sm shadow-none py-0 px-2' data-action='comments#manageForm'>
         <%= icon 'fa', 'edit', class: 'text-secondary', data: { target: 'comments.editBtn'} %>

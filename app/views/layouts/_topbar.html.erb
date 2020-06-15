@@ -11,7 +11,7 @@
     </div>
     <div class='row align-items-center'>
       <div class='nav-item col'>
-        <%= link_to current_user, class: "nav-link p-0" do %>
+        <%= link_to current_user, class: "nav-link pl-0" do %>
           <%= avatar_for(current_user, 30) %>
           <span class='text-warning'><%= current_user.username %></span>
         <% end %>
@@ -32,13 +32,15 @@
           </div>
           <div class="dropdown-menu dropdown-menu-right position-absolute">
             <div class="dropdown-item text-center">
-              <%= link_to 'All friends', friends_path, class: 'btn text-info' %>
+              <%= link_to 'All friends', friends_path, class: 'nav-link text-warning' %>
             </div>
             <% if current_user.received_friend_requests.pending.present? %>
               <div class="dropdown-divider"></div>
               <% current_user.received_friend_requests.pending.each do |friend_request| %>
                 <div class="dropdown-item text-center">
-                  <div class='col'><%= friend_request.sender.username %></div>
+                  <div class='col'>
+                    <%= link_to friend_request.sender.username, friend_request.sender, class: 'nav-link text-info' %>
+                  </div>
                   <div class='col btn-group'>
                     <%= link_to accepted_path(friend_request), class: 'btn btn-sm btn-block btn-outline-success m-0' do %>
                       <span class='icon-holder'>

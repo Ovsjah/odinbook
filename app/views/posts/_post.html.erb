@@ -1,7 +1,9 @@
 <div id='post-<%= post.id%>' class='card my-3 bg-light'>
   <div class='card-header border-0'>
-    <%= avatar_for post.author, 40 %>
-    <span><%= post.author.username %></span>
+    <%= link_to post.author, class: 'd-inline nav-link text-muted font-weight-bold' do %>
+      <%= avatar_for post.author, 40 %>
+      <span><%= post.author.username %></span>
+    <% end %>
     <% if current_user == post.author %>
       <div class='btn-toolbar float-right'>
         <button class='btn shadow-none py-0 px-2' data-toggle="modal" data-target="#edit_post<%= post.id %>">
