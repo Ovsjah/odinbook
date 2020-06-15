@@ -10,7 +10,7 @@
         <button class='btn btn-lg shadow-none position-absolute mt-1' style='right:5px; z-index:2'>
           <%= icon 'fa', 'trash', class: 'text-danger', data: { action: 'click->image-preview#delete', postid: post.id, imgid: img.id, imgidx: idx } %>
         </button>
-        <%= image_tag img.variant(resize_to_fit: [nil, 1000]), class: "img-fluid rounded my-2", data: { action:"click->image-preview#preview" } %>
+        <%= image_tag img.variant(resize_to_fit: [nil, 1000]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" } %>
       </div>
     <% end %>
     <div class="modal fade" id='imagePreviewModal'>

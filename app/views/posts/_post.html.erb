@@ -16,14 +16,14 @@
       </div>
     <% end %>
   </div>
-  <div class='card-body'>
+  <div class='card-body pb-0'>
     <p class='card-text'>
       <%= post.content %>
     </p>
-    <% if post.images.attached? %>
-      <%= render 'posts/image_carousel', post: post %>
-    <% end %>
   </div>
+  <% if post.images.attached? %>
+    <%= render 'posts/image_carousel', post: post %>
+  <% end %>
   <div class='card-footer bg-light border-0' data-controller='post-footer' data-post-footer-post-id=<%= post.id %>>
     <span class="btn text-secondary p-0<%= ' text-warning' if current_user.liked_posts.include? post %>" data-action='click->post-footer#like' data-target='post-footer.likeBtn'>
       <%= icon 'fa', 'thumbs-up' %>
