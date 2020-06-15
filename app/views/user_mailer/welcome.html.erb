@@ -1,0 +1,6 @@
+<h1>Hello, <%= @user.username %></h1>
+<p>You have successfully created an Odinbook account.</p>
+<p>
+  To see your profile, please visit the
+  <%= link_to "#{@user.username.possessive} account", @user %>.
+</p>

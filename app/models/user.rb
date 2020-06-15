@@ -34,6 +34,7 @@ class User < ApplicationRecord
     dependent: :destroy
 
   before_destroy { friends.clear }
+  after_commit :send_welcome_email, on: :create
 
   scope :case_insensitive_find, -> (attribute, value) { where("lower(#{attribute}) = ?", value.downcase).take }
 
@@ -102,5 +103,9 @@ class User < ApplicationRecord
       friends << @friend
       @friend.friends << self
       @friend.received_friend_requests.pending.find_by_sender_id(self.id)&.destroy
+    end
+
+    def send_welcome_email
+      UserMailer.send_welcome_to(self).deliver_later
     end
 end
