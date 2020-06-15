@@ -1,0 +1,24 @@
+<div class='card flex-fill'>
+  <div class='card-header border-0 bg-white'>
+    <h5 class='card-title text-center m-0'><%= user.username %></h5>
+  </div>
+  <div class='text-center'>
+    <%= avatar_for(user, 200, 'rounded-circle') %>
+  </div>
+  <div class='card-body pb-0'>
+    <h5 class='card-title text-center'>
+      <span class='col badge badge-light'><%= user.email %></span>
+    </h5>
+  </div>
+  <div class='card-footer bg-white border-0 pt-0'>
+    <% if current_user == user %>
+      <%= link_to 'Edit profile', edit_user_path(current_user), class: 'btn btn-block btn-info mt-1' %>
+    <% else %>
+      <% unless current_user.friends.include? user %>
+        <%= link_to 'Send a friend request', send_friend_request_path(user), class: 'btn btn-block btn-primary mt-1' %>
+      <% else %>
+        <%= link_to 'Unfriend', unfriend_path(user), method: :delete, class: 'btn btn-block btn-danger mt-1' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

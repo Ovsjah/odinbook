@@ -1,0 +1,30 @@
+<div class='col-lg-3 col-md-6 col-sm-7 p-0 mx-auto'>
+  <div class='card my-3 bg-light'>
+    <div class='card-header border-0'>
+      <h5 class='card-title text-center m-0'>Edit Profile</h5>
+    </div>
+    <div class='card-body'>
+      <%= form_with model: current_user, local: true do |f| %>
+        <div class='form-group'>
+          <%= f.label :avatar, class: 'col-form-label' %>
+          <div class='text-center'>
+            <%= avatar_for(current_user, 200) %>
+          </div>
+          <%= f.file_field :avatar, class: 'h6 p-0 mt-4 col overflow-hidden' %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :email, class: 'col-form-label' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :username, class: 'col-form-label' %>
+          <%= f.text_field :username, class: 'form-control' %>
+        </div>
+        <div class='btn-toolbar mt-2'>
+          <%= link_to 'Cancel', current_user, class: 'btn btn-secondary mr-1' %>
+          <%= f.submit 'Edit', class: 'btn btn-warning' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
-<%= form_with url: url, local: true, method: :get, class: 'row' do %>
-  <div class='input-group col-lg-3 col-md-8'>
+<%= form_with url: url, local: true, method: :get, class: 'form-inline' do %>
+  <div class='input-group'>
     <%= text_field_tag :search, params[:search], placeholder: "Find a friend", class: 'form-control form-control-sm' %>
     <div class='input-group-prepend'>
       <%= button_tag name: nil, class:"btn btn-sm btn-outline-warning rounded-right" do %>

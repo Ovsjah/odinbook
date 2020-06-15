@@ -1,21 +1,42 @@
-<div class='card my-5 bg-light'>
+<div id='post-<%= post.id%>' class='card my-3 bg-light'>
   <div class='card-header border-0'>
-    <%= image_tag('avatar-placeholder.gif', size: 40, class: "rounded-circle") %>
-    <%= post.author.username %>
+    <%= avatar_for post.author, 40 %>
+    <span><%= post.author.username %></span>
+    <% if current_user == post.author %>
+      <div class='btn-toolbar float-right'>
+        <button class='btn shadow-none py-0 px-2' data-toggle="modal" data-target="#edit_post<%= post.id %>">
+          <%= icon 'fa', 'edit', class: 'text-muted' %>
+        </button>
+        <%= render 'posts/post_form_modal', post: post, type: "edit_post"%>
+        <%= link_to post, method: :delete, class: 'btn shadow-none py-0 px-2' do %>
+          <%= icon 'fa', 'trash', class: 'text-muted' %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class='card-body'>
     <p class='card-text'>
       <%= post.content %>
     </p>
+    <% if post.images.attached? %>
+      <%= render 'posts/image_carousel', post: post %>
+    <% end %>
   </div>
-  <div class='card-footer'>
-    <span class='btn text-secondary p-0'>
+  <div class='card-footer bg-light border-0' data-controller='post-footer' data-post-footer-post-id=<%= post.id %>>
+    <span class="btn text-secondary p-0<%= ' text-warning' if current_user.liked_posts.include? post %>" data-action='click->post-footer#like' data-target='post-footer.likeBtn'>
       <%= icon 'fa', 'thumbs-up' %>
-      <span><%= post.likes.count %></span>
+      <span data-target='post-footer.likeCounter'><%= post.likes.count %></span>
     </span>
-    <span class='btn text-secondary float-right p-0'>
+    <span class='btn text-secondary float-right p-0' data-action='click->post-footer#comment' data-target='post-footer.commentBtn'>
       <%= icon 'fa', 'comment' %>
       <span>Comment</span>
     </span>
+    <div class='mt-2 d-none' data-target='post-footer.formWithComments'>
+      <%= render 'comments/comment_form', submit: 'Comment', comment: @comment = current_user.comments.build(post: post) %>
+      <ul class='list-group'>
+        <%= render 'comments/comment', comment: @comment, visible: false %>
+        <%= render post.comments.recent_comments, visible: true %>
+      </ul>
+    </div>
   </div>
 </div>

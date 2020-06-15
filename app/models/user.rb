@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  PROVIDERS = %w[facebook google_oauth2 twitter]
-
   attr_writer :login
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,9 +7,9 @@ class User < ApplicationRecord
     :validatable, :omniauthable,
     omniauth_providers: PROVIDERS
 
-  before_save { username.downcase! }
+  validates :username, presence: true, uniqueness: true, case_sensitive: false
 
-  validates :username, presence: true, uniqueness: true
+  has_one_attached :avatar
 
   has_many :posts, -> { order(created_at: :desc) }, dependent: :destroy
 
@@ -37,6 +35,8 @@ class User < ApplicationRecord
 
   before_destroy { friends.clear }
 
+  scope :case_insensitive_find, -> (attribute, value) { where("lower(#{attribute}) = ?", value.downcase).take }
+
   class << self
     def find_for_database_authentication(warden_conditions)
       if login = warden_conditions[:login]
@@ -50,13 +50,9 @@ class User < ApplicationRecord
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
         user.password = Devise.friendly_token[0, 20]
-        user.username = format(auth.info.name)
+        user.username = auth.info.name
         user.generate_username until user.valid?
       end
-    end
-
-    def format(name)
-      name.downcase.gsub(/([[:punct:]]+|\s+)/) { |m| m.blank? ? '_' : '' }
     end
   end
 
@@ -76,10 +72,6 @@ class User < ApplicationRecord
     set_friendship unless @friend.friends.include? self
   end
 
-  def generate_username
-    self.username += (self.username.first + rand.to_s[2..3])
-  end
-
   def unfriend(user_id)
     user = self.class.find(user_id)
     received_friend_requests.find_by_sender_id(user)&.destroy
@@ -92,14 +84,23 @@ class User < ApplicationRecord
     likes.create(post_id: post_id)
   end
 
+  def dislike(post_id)
+    likes.find_by_post_id(post_id).destroy
+  end
+
   def comment(post_id, comment)
     comments.create(post_id: post_id, content: comment)
   end
 
   private
 
+    def generate_username
+      self.username += (self.username.first + rand.to_s[2..3])
+    end
+
     def set_friendship
       friends << @friend
       @friend.friends << self
+      @friend.received_friend_requests.pending.find_by_sender_id(self.id)&.destroy
     end
 end

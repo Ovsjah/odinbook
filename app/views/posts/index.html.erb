@@ -1,3 +1,9 @@
 <div class='col-lg-5 col-md-8 mx-auto'>
+  <button class='btn btn-block btn-outline-warning rounded-pill mt-3' data-toggle="modal" data-target="#create_post">
+    <span class='h5'>What's on your mind, <%= current_user.username %>?</span>
+  </button>
+  <%= render 'post_form_modal', post: current_user.posts.build, type: 'create_post' %>
+  <div class='d-flex'>
+  </div>
   <%= render @recent_posts %>
 </div>

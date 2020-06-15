@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_user
 
-  User::PROVIDERS.each do |provider|
+  PROVIDERS.each do |provider|
     define_method provider do
       if @user.persisted?
         sign_in_and_redirect @user

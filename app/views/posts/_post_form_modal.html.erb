@@ -1,0 +1,31 @@
+<div class="modal fade" id=<%= post.id ? type + post.id.to_s : type %>>
+  <div class="modal-dialog<%= ' modal-dialog-centered' if post.id %>">
+    <div class="modal-content bg-light">
+      <div class="modal-header border-0">
+        <h4 class="modal-title mx-auto" id=<%= post.id ? type + post.id.to_s : type %>><%= type.titleize %></h4>
+        <button type="button" class="btn close shadow-none m-0 p-0" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-0">
+        <%= form_with model: post, local: true do |f| %>
+          <div class='form-group'>
+            <%= f.text_area :content, rows: 7, class: 'form-control border-0' %>
+          </div>
+          <div class='form-group'>
+            <%= f.label :images, class: 'col-form-label' do %>
+              <h5 class="modal-title">
+                <%= icon 'fa', 'image', class: 'text-warning' %>
+                <span>Add images</span>
+              </h5>
+            <% end %>
+            <%= f.file_field :images, multiple: true, class: 'h6 overflow-hidden col' %>
+          </div>
+          <div class='form-group mt-4 mb-0'>
+            <%= f.submit type.humanize, class: 'btn btn-block btn-info' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
