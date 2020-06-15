@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@odinbook.com'
+  default from: 'no-reply@ovsjazz-odinbook.herokuapp.com'
   layout 'mailer'
 end
