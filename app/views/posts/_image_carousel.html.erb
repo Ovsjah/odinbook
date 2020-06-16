@@ -4,23 +4,25 @@
       <li id='indicator-<%= idx %>' data-target="#postImagesCarousel<%= post.id %>" data-slide-to="<%= idx %>" class="bg-warning carousel-idx <%= ' active' if idx == 0 %>"></li>
     <% end %>
   </ol>
-  <div class="carousel-inner" data-controller='image-preview' data-action='load@window->image-preview#resizeCarousel resize@window->image-preview#resizeCarousel orientationchange@window->image-preview#resizeCarousel'>
+  <div class="carousel-inner" data-controller='image-preview'>
     <% post.images.each_with_index do |img, idx| %>
       <div id='img-<%= img.id %>' class="btn carousel-item<%= ' active' if idx == 0 %> p-0 border-0">
         <button class='btn btn-lg shadow-none position-absolute mt-1' style='right:5px; z-index:2'>
           <%= icon 'fa', 'trash', class: 'text-danger', data: { action: 'click->image-preview#delete', postid: post.id, imgid: img.id, imgidx: idx } %>
         </button>
-        <%= image_tag img.variant(resize_to_fit: [1920, nil]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" } %>
+        <%= image_tag img.variant(resize_and_pad: [1920, 1080]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" } %>
       </div>
     <% end %>
     <div class="modal fade" id='imagePreviewModal'>
-      <div class="modal-dialog mw-100">
-        <div class="modal-content border-0" style='background:none'>
-          <button type="button" class="btn close shadow-none position-absolute" style='right:1px; z-index:1' data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="modal-body">
-            <img src='' id='imagePreview' class='img-fluid w-100'>
+      <div class='col-lg-10 mx-auto'>
+        <div class="modal-dialog mw-100">
+          <div class="modal-content border-0" style='background:none'>
+            <button type="button" class="btn close shadow-none position-absolute" style='right:1px; z-index:1' data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+              <img src='' id='imagePreview' class='img-fluid w-100'>
+            </div>
           </div>
         </div>
       </div>

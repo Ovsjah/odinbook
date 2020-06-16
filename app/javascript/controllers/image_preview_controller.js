@@ -1,14 +1,6 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  resizeCarousel() {
-    let items = $(this.element.querySelectorAll('.carousel-item')),
-      maxHeight = Math.max(...items.map(function() {
-        return $(this).outerHeight()
-      }))
-    items.css('min-height', maxHeight + 'px')
-  }
-
   preview(event) {
     document.getElementById('imagePreview').src = event.target.src
     $('#imagePreviewModal').modal('show')
