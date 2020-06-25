@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :posts, except: %i[new show edit] do
     resources :images, only: :destroy
   end
+  resources :images, only: :destroy
   resources :comments, only: %i[create update destroy]
 
   get '/send/:id', to: 'friend_requests#send_request', as: :send_friend_request

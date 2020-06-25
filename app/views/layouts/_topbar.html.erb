@@ -1,4 +1,4 @@
-<nav class='navbar navbar-expand-sm navbar-light bg-light py-0'>
+<nav data-controller='fixed-topbar' data-action='scroll@window->fixed-topbar#manageScroll' class='navbar navbar-expand-sm fixed-top navbar-light bg-light py-0'>
   <%= link_to root_path, class: 'navbar-brand m-0' do %>
     <%= image_tag 'odin-logo.svg', size: 50 %>
   <% end %>
@@ -10,11 +10,18 @@
       <%= render 'layouts/search', url: seek_path %>
     </div>
     <div class='row align-items-center'>
-      <div class='nav-item col'>
+      <div class='nav-item col pr-0'>
         <%= link_to current_user, class: "nav-link pl-0" do %>
           <%= avatar_for(current_user, 30) %>
           <span class='text-warning'><%= current_user.username %></span>
         <% end %>
+      </div>
+      <div class="nav-item">
+        <button class='btn shadow-none text-warning pr-0' data-toggle="modal" data-target="#create_post">
+          <span class="icon-holder">
+            <%= icon 'fa', 'pen' %>
+          </span>
+        </button>
       </div>
       <div class="nav-item">
         <div class='dropdown'>
@@ -61,7 +68,7 @@
         </div>
       </div>
       <div class="nav-item">
-        <%= link_to destroy_user_session_path, method: :delete, class: 'btn text-warning' do %>
+        <%= link_to destroy_user_session_path, method: :delete, class: 'btn text-danger' do %>
           <span class="h5 icon-holder">
             <%= icon 'fa', 'sign-out-alt' %>
           </span>
@@ -70,3 +77,4 @@
     </div>
   </div>
 </nav>
+<%= render 'posts/post_form_modal', post: current_user.posts.build, type: 'create_post' %>

@@ -7,14 +7,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=yes'>
   </head>
 
   <body>
     <% if user_signed_in? %>
       <%= render 'layouts/topbar' %>
     <% end %>
-    <div class='container-fluid'>
+    <div class='container-fluid p-0' style="margin-top:85px">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </div>

@@ -5,11 +5,11 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to root_path, flash: { notice: "Your profile is up to date."}
+      flash.now[:notice] = "Your profile is up to date."
     else
       flash.now[:danger] = "Sorry, but something went wrong, please try again."
-      render :edit
     end
+    render :edit
   end
 
   def friends
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
         User.case_insensitive_find :username, to_seek
       end
 
-    if @user
+    if @user && @user.class == User
       render :show
     else
       redirect_to root_path, flash: {danger: "Sorry, but the user doesn't exist."}
@@ -34,7 +34,12 @@ class UsersController < ApplicationController
 
   def unfriend
     user = current_user.unfriend(params[:id]).first if User.exists?(params[:id])
-    redirect_to friends_path, flash: { notice: "<b>#{user.username}</b> was successfully unfriended.".html_safe }
+    flash.now[:notice] = "<b>#{user.username}</b> was successfully unfriended.".html_safe
+    if current_user.friends.present?
+      render :friends
+    else
+      redirect_to root_path, flash: { notice: "You have no friends." }
+    end
   end
 
   def like

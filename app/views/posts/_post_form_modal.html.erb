@@ -1,5 +1,5 @@
 <div class="modal fade" id=<%= post.id ? type + post.id.to_s : type %>>
-  <div class="modal-dialog<%= ' modal-dialog-centered' if post.id %>">
+  <div class="modal-dialog modal-lg<%= ' modal-dialog-centered' if post.id %>">
     <div class="modal-content bg-light">
       <div class="modal-header border-0">
         <h4 class="modal-title mx-auto" id=<%= post.id ? type + post.id.to_s : type %>><%= type.titleize %></h4>
