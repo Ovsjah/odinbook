@@ -17,7 +17,7 @@
           <div data-target="avatar-upload.imgWrapper" class='text-center'>
             <%= avatar_for current_user, 300, 'centered-and-cropped rounded-circle' %>
           </div>
-          <%= f.file_field :avatar, class: 'h6 p-0 mt-4 col overflow-hidden', data: { action: 'avatar-upload#showBefore', target: 'avatar-upload.avatar' }, style: "height: 100%" %>
+          <%= f.file_field :avatar, class: 'h6 p-0 mt-4 col overflow-hidden', data: { action: 'avatar-upload#showBefore', target: 'avatar-upload.avatar' }, style: "height: 100%", direct_upload: true %>
         </div>
         <div class='form-group'>
           <%= f.label :email, class: 'col-form-label' %>
