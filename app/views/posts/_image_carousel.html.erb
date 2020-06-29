@@ -13,20 +13,6 @@
         <%= image_tag img.variant(resize_and_pad: [1920, 1080]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" }, alt: 'Your image' %>
       </div>
     <% end %>
-    <div class="modal fade" id='imagePreviewModal'>
-      <div class='col-lg-10 mx-auto'>
-        <div class="modal-dialog mw-100">
-          <div class="modal-content border-0" style='background:none'>
-            <button type="button" class="btn close shadow-none position-absolute" style='right:1px; z-index:1' data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body">
-              <img src='' id='imagePreview' class='img-fluid w-100'>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <a class="carousel-control-prev" href="#postImagesCarousel<%= post.id %>" role="button" data-slide="prev">
     <h3><%= icon 'fa', 'angle-left', class: 'text-warning' %></h3>
@@ -36,4 +22,18 @@
     <h3><%= icon 'fa', 'angle-right', class: 'text-warning' %></h3>
     <span class="sr-only">Next</span>
   </a>
+</div>
+<div class="modal fade" id='imagePreviewModal'>
+  <div class='col-lg-10 mx-auto'>
+    <div class="modal-dialog mw-100">
+      <div class="modal-content border-0" style='background:none'>
+        <button type="button" class="btn close shadow-none text-warning position-absolute" style='right:1px; z-index:4' data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+          <img src='' id='imagePreview' class='img-fluid w-100'>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
