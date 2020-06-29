@@ -2,7 +2,7 @@
   <div class='input-group'>
     <%= text_field_tag :search, params[:search], placeholder: "Find a friend", class: 'form-control form-control-sm' %>
     <div class='input-group-prepend'>
-      <%= button_tag name: nil, class:"btn btn-sm btn-outline-warning rounded-right" do %>
+      <%= button_tag name: nil, class:"btn btn-sm btn-outline-warning rounded-right", title: "Search user" do %>
         <%= icon 'fa', 'search' %>
       <% end %>
     </div>

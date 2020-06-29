@@ -9,12 +9,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=yes'>
   </head>
-
   <body>
     <% if user_signed_in? %>
       <%= render 'layouts/topbar' %>
     <% end %>
-    <div class='container-fluid p-0' style="margin-top:85px">
+    <div class='container-fluid p-0'>
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </div>
