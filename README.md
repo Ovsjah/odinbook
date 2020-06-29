@@ -1,4 +1,4 @@
-# [Odinbook](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project#project-building-facebook)
+# [Odinbook](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project#project-building-facebook) [(Heroku deployed)](https://ovsjazz-odinbook.herokuapp.com/users/sign_in)
 
 ## About
 Facebook clone, where users can send friend requests, post and comment on posts. User can sign-in/sign-up using sso via Google, Twitter or Facebook accounts.
