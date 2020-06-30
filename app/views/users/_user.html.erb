@@ -1,6 +1,6 @@
 <div id="userId-<%= user.id %>" class='card flex-fill rounded-0 bg-light'>
-  <div class='card-header border-0'>
-    <h5 class='card-title text-center m-0'><%= user.username %></h5>
+  <div class='card-header border-0 text-center'>
+    <%= link_to user.username, user, class: 'h5 nav-link text-secondary font-weight-bold card-title p-0 m-0' %>
   </div>
   <div class='card-body mx-auto'>
     <%= avatar_for(user, 300) %>
