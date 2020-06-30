@@ -22,7 +22,7 @@
     </p>
   </div>
   <% if post.images.attached? %>
-    <%= render 'posts/image_carousel', post: post %>
+    <%= render 'images/image_carousel', post: post %>
   <% end %>
   <div class='card-footer bg-light border-0' data-controller='post-footer' data-post-footer-post-id=<%= post.id %>>
     <button class="btn shadow-none text-secondary p-0<%= ' text-warning' if current_user.liked_posts.include? post %>" data-action='click->post-footer#like' data-target='post-footer.likeBtn' title='Like/unlike'>

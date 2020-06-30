@@ -1,0 +1,29 @@
+<div id="postImagesCarousel<%= post.id %>" class="carousel slide" data-interval="false" data-controller='image-preview'>
+  <ol class="carousel-indicators<%= ' d-none' if post.images.size <= 1 %>">
+    <% post.images.each_with_index do |img, idx| %>
+      <li id='indicator-<%= img.id %>' data-target="#postImagesCarousel<%= post.id %>" data-slide-to="<%= idx %>" class="bg-warning carousel-idx <%= ' active' if idx == 0 %>"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner h-100">
+    <% post.images.each_with_index do |img, idx| %>
+      <div id='img-<%= img.id %>' class="btn carousel-item<%= ' active' if idx == 0 %> p-0 border-0">
+        <% if current_user == post.author %>
+          <button class='btn btn-lg shadow-none position-absolute mt-1' style='right:1px; z-index:2'>
+            <%= icon 'fa', 'trash', class: 'text-danger', data: { action: 'click->image-preview#delete', postid: post.id, imgid: img.id } %>
+          </button>
+        <% end %>
+        <%= image_tag img.variant(resize_and_pad: [1920, 1080]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" }, alt: 'Your image' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="justify-content-between<%= ' d-none' if post.images.size <= 1 %>" data-target='image-preview.carouselControls'>
+    <a class="carousel-control-prev" href="#postImagesCarousel<%= post.id %>" role="button" data-slide="prev">
+      <h3><%= icon 'fa', 'angle-left', class: 'text-warning' %></h3>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#postImagesCarousel<%= post.id %>" role="button" data-slide="next">
+      <h3><%= icon 'fa', 'angle-right', class: 'text-warning' %></h3>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
