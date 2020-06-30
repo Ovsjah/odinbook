@@ -7,9 +7,11 @@
   <div class="carousel-inner h-100" data-controller='image-preview'>
     <% post.images.each_with_index do |img, idx| %>
       <div id='img-<%= img.id %>' class="btn carousel-item<%= ' active' if idx == 0 %> p-0 border-0">
-        <button class='btn btn-lg shadow-none position-absolute mt-1' style='right:1px; z-index:2'>
-          <%= icon 'fa', 'trash', class: 'text-danger', data: { action: 'click->image-preview#delete', postid: post.id, imgid: img.id, imgidx: idx } %>
-        </button>
+        <% if current_user == post.author %>
+          <button class='btn btn-lg shadow-none position-absolute mt-1' style='right:1px; z-index:2'>
+            <%= icon 'fa', 'trash', class: 'text-danger', data: { action: 'click->image-preview#delete', postid: post.id, imgid: img.id, imgidx: idx } %>
+          </button>
+        <% end %>
         <%= image_tag img.variant(resize_and_pad: [1920, 1080]), class: "img-fluid my-2", data: { action:"click->image-preview#preview" }, alt: 'Your image' %>
       </div>
     <% end %>
