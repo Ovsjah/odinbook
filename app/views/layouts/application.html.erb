@@ -14,8 +14,13 @@
       <header>
         <%= render 'layouts/topbar' %>
       </header>
+    <% else %>
+      <div class='container col-lg-5 text-warning'>
+        <%= image_tag 'odin-logo.svg' %>
+        <h2 class='d-inline font-weight-bold'>The Odinbook</h2>
+      </div>
     <% end %>
-    <main role='main' class='container col-lg-5 col-md-8 mx-auto px-0 pt-5 mt-3'>
+    <main role='main' class='container col-lg-5 col-md-8 mx-auto mt-5 px-0'>
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </main>
