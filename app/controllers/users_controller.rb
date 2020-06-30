@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     user = current_user.unfriend(params[:id]).first if User.exists?(params[:id])
     flash.now[:notice] = "<b>#{user.username}</b> was successfully unfriended.".html_safe
     if current_user.friends.present?
-      render :friends
+      redirect_to friends_path
     else
       redirect_to root_path, flash: { notice: "You have no friends." }
     end

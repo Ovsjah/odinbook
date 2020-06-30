@@ -11,11 +11,13 @@
   </head>
   <body>
     <% if user_signed_in? %>
-      <%= render 'layouts/topbar' %>
+      <header>
+        <%= render 'layouts/topbar' %>
+      </header>
     <% end %>
-    <div class='container-fluid p-0'>
+    <main role='main' class='container col-lg-5 col-md-8 mx-auto px-0 pt-5 mt-3'>
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>
